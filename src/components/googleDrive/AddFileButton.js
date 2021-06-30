@@ -18,7 +18,7 @@ function AddFileButton({ currentFolder }) {
    
   const handleClose = (id) => {
     setUploadingFiles((prevUploadingFiles) => {
-      return prevUploadingFiles.filter((uploadFile) => uploadFile.id !== id );
+      return prevUploadingFiles.filter( uploadFile => uploadFile.id !== id );
     });
   }
 
@@ -28,11 +28,10 @@ function AddFileButton({ currentFolder }) {
 
     // not working 
     const id = uuidv4();
-    console.log(id);
-    setUploadingFiles((prevUploadingFiles) => [
+    setUploadingFiles(prevUploadingFiles => [
       ...prevUploadingFiles,
-      { id: id, name: file.name, progress: 0, error: false },
-    ]);
+      { id: id, name: file.name, progress: 0, error: false }
+    ])
 
  
     const filePath =
@@ -128,7 +127,7 @@ function AddFileButton({ currentFolder }) {
             }}
           >
             {uploadingFiles.map((file) => (
-              <Toast key={file.id}  onClose={handleClose(file.id)} >
+              <Toast key={file.id}  onClose={(file) => {handleClose(file.id)}} >
                 <Toast.Header
                   closeButton={file.error}
                   className="text-truncate w-100 d-block"
